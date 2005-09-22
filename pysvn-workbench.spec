@@ -2,6 +2,7 @@
 
 %define	module	WorkBench
 Summary:	Python SVN GUI Tools
+Summary(pl):	Graficzne narzêdzia w Pythonie do SVN
 Name:		python-workbench
 Version:	1.1.6
 Release:	1
@@ -25,10 +26,18 @@ pysvn WorkBench Features:
 - Runs on Windows and Unix platforms
 - Implemented in Python, allowing customisation
 
-%prep
-%setup  -q -n WorkBench-%{version}
+%description -l pl
+Cechy pysvn WorkBench:
+- ³atwy do nauki i u¿ywania
+- wszystkie operacje klienckie subversion z poziomu GUI
+- obs³uga przep³ywu pracy przy tworzeniu oprogramowania
+- wbudowany graficzny diff pokazuj±cy ró¿nice linii i znaków
+- mo¿liwo¶æ porównywania miêdzy rewizjami plików w historii
+- dzia³a na platformach Windows i Unix
+- zaimplementowany w Pythonie, konfigurowalny
 
-%build
+%prep
+%setup -q -n WorkBench-%{version}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -46,5 +55,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%{_datadir}/%{name}
 %attr(755,root,root) %{_bindir}/*
+%{_datadir}/%{name}
