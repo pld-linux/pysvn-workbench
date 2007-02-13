@@ -2,7 +2,7 @@
 
 %define	module	WorkBench
 Summary:	Python SVN GUI Tools
-Summary(pl.UTF-8):   Graficzne narzędzia w Pythonie do SVN
+Summary(pl.UTF-8):	Graficzne narzędzia w Pythonie do SVN
 Name:		python-workbench
 Version:	1.1.6
 Release:	1
