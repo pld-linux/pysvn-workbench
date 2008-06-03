@@ -4,16 +4,17 @@
 Summary:	Python SVN GUI Tools
 Summary(pl.UTF-8):	Graficzne narzędzia w Pythonie do SVN
 Name:		python-workbench
-Version:	1.1.6
+Version:	1.5.3
 Release:	1
 License:	Apache Group License
 Group:		Development/Languages/Python
-Source0:	http://pysvn.tigris.org/files/documents/1233/22212/WorkBench-%{version}.tar.gz
-# Source0-md5:	47e69a287d78e0bb2e9f7f401e8b78e0
+Source0:	http://pysvn.barrys-emacs.org/source_kits/WorkBench-%{version}.tar.gz
+# Source0-md5:	52c93ebbe89e8ffd7c203c50fab258ea
 URL:		http://pysvn.tigris.org/
 BuildRequires:	python-devel
 %pyrequires_eq	python
 Requires:	python-pysvn
+Requires:	python-wxPython
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -56,4 +57,11 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
-%{_datadir}/%{name}
+%dir %{_datadir}/%{name}
+%{_datadir}/%{name}/toolbar_images
+%{_datadir}/%{name}/*.py*
+%{_datadir}/%{name}/pylintrc
+%{_datadir}/%{name}/wb.ic*
+%{_datadir}/%{name}/wb.png
+%{_datadir}/%{name}/wb.tiff
+%attr(755,root,root) %{_datadir}/%{name}/*.sh
