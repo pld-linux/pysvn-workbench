@@ -5,17 +5,20 @@
 Summary:	Python SVN GUI Tools
 Summary(pl.UTF-8):	Graficzne narzędzia w Pythonie do SVN
 Name:		pysvn-workbench
-Version:	1.5.3
-Release:	1
+Version:	1.7.0
+Release:	0.1
 License:	Apache
 Group:		Development/Languages/Python
 Source0:	http://pysvn.barrys-emacs.org/source_kits/WorkBench-%{version}.tar.gz
-# Source0-md5:	52c93ebbe89e8ffd7c203c50fab258ea
+# Source0-md5:	aed0cc35a87c6dd287ad6a1a2fcf5b06
 URL:		http://pysvn.tigris.org/
-BuildRequires:	python-devel
+BuildRequires:	rpm-pythonprov
+BuildRequires:	rpmbuild(macros) >= 1.714
+BuildRequires:	sed >= 4.0
 Requires:	python
 Requires:	python-pysvn
 Requires:	python-wxPython
+BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -41,13 +44,20 @@ Cechy pysvn WorkBench:
 %prep
 %setup -q -n WorkBench-%{version}
 
+%{__sed} -i -e 's#wb_main.py#%{_datadir}/%{name}/wb_main.py#g' Source/wb.sh
+
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{name}}
 
 cp -a Source/* $RPM_BUILD_ROOT%{_datadir}/%{name}
-sed -i -e 's#wb_main.py#%{_datadir}/%{name}/wb_main.py#g' $RPM_BUILD_ROOT%{_datadir}/%{name}/wb.sh
 ln -s %{_datadir}/%{name}/wb.sh $RPM_BUILD_ROOT%{_bindir}/%{name}
+
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/*.cmd
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/*.h
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/*.mak
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/*.template
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/I18N/*.po
 
 %py_ocomp $RPM_BUILD_ROOT%{_datadir}/%{name}
 %py_comp $RPM_BUILD_ROOT%{_datadir}/%{name}
@@ -57,7 +67,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/pysvn-workbench
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/toolbar_images
 %{_datadir}/%{name}/*.py*
