@@ -1,18 +1,19 @@
-%bcond_with	tests
+#
+# Conditional build:
+%bcond_with	tests		# build with tests
 
-%define	module	WorkBench
 Summary:	Python SVN GUI Tools
 Summary(pl.UTF-8):	Graficzne narzędzia w Pythonie do SVN
-Name:		python-workbench
+Name:		pysvn-workbench
 Version:	1.5.3
 Release:	1
-License:	Apache Group License
+License:	Apache
 Group:		Development/Languages/Python
 Source0:	http://pysvn.barrys-emacs.org/source_kits/WorkBench-%{version}.tar.gz
 # Source0-md5:	52c93ebbe89e8ffd7c203c50fab258ea
 URL:		http://pysvn.tigris.org/
 BuildRequires:	python-devel
-%pyrequires_eq	python
+Requires:	python
 Requires:	python-pysvn
 Requires:	python-wxPython
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
