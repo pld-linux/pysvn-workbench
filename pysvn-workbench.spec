@@ -16,7 +16,7 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 BuildRequires:	sed >= 4.0
 Requires:	python
-Requires:	python-pysvn
+Requires:	python-pysvn >= 1.8.0
 Requires:	python-wxPython
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
