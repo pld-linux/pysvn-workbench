@@ -6,7 +6,7 @@ Summary:	Python SVN GUI Tools
 Summary(pl.UTF-8):	Graficzne narzędzia w Pythonie do SVN
 Name:		pysvn-workbench
 Version:	1.7.0
-Release:	0.1
+Release:	0.2
 License:	Apache
 Group:		Development/Languages/Python
 Source0:	http://pysvn.barrys-emacs.org/source_kits/WorkBench-%{version}.tar.gz
@@ -44,20 +44,18 @@ Cechy pysvn WorkBench:
 %prep
 %setup -q -n WorkBench-%{version}
 
-%{__sed} -i -e 's#wb_main.py#%{_datadir}/%{name}/wb_main.py#g' Source/wb.sh
+ln -s Source/linux-rpmbuild.mak Makefile
+
+%{__sed} -i -e 's/install /install -p /' Makefile
+
+%build
+%{__make} \
+	PYTHON=%{__python}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{name}}
-
-cp -a Source/* $RPM_BUILD_ROOT%{_datadir}/%{name}
-ln -s %{_datadir}/%{name}/wb.sh $RPM_BUILD_ROOT%{_bindir}/%{name}
-
-%{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/*.cmd
-%{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/*.h
-%{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/*.mak
-%{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/*.template
-%{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/I18N/*.po
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %py_ocomp $RPM_BUILD_ROOT%{_datadir}/%{name}
 %py_comp $RPM_BUILD_ROOT%{_datadir}/%{name}
@@ -69,10 +67,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/pysvn-workbench
 %dir %{_datadir}/%{name}
-%{_datadir}/%{name}/toolbar_images
 %{_datadir}/%{name}/*.py*
-%{_datadir}/%{name}/pylintrc
-%{_datadir}/%{name}/wb.ic*
 %{_datadir}/%{name}/wb.png
-%{_datadir}/%{name}/wb.tiff
-%attr(755,root,root) %{_datadir}/%{name}/*.sh
